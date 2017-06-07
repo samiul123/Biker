@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="location_name">
+        <item>none</item>
+        <item>Dhaka</item>
+        <item>Mymensingh</item>
+        <item>Khulna</item>
+        <item>Chittagong</item>
+        <item>Sylhet</item>
+        <item>Rangpur</item>
+        <item>Barisal</item>
+    </string-array>
+    <string-array name="category">
+        <item>All</item>
+        <item>Spare Parts</item>
+        <item>Bikes</item>
+        <item>Accessories</item>
+    </string-array>
+
+    <string-array name="price_range">
+        <item>50000-75000</item>
+        <item>75000-100000</item>
+        <item>100000-125000</item>
+        <item>125000-150000</item>
+        <item>150000-175000</item>
+        <item>175000-200000</item>
+        <item>200000-225000</item>
+        <item>225000-250000</item>
+        <item>250000-275000</item>
+        <item>275000-300000</item>
+    </string-array>
+</resources>
