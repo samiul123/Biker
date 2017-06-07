@@ -41,7 +41,7 @@ public class Sell extends Fragment {
     Spinner spinner,spinner_item;
     ImageView imageView;
     String locationFromSpinner,categoryFromSpinner;
-    DateFormat datef = new SimpleDateFormat("EEE, MMM d, ''yy");
+    DateFormat datef = new SimpleDateFormat("yyyy.MM.dd G 'at' HH:mm:ss z");
     String date = datef.format(Calendar.getInstance().getTime());
     private static final int SELECTED_PICTURE = 1;
 

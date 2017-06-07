@@ -40,7 +40,7 @@ public class Buy extends Fragment implements AdapterView.OnClickListener{
     ViewFlipper vf;
     List<RowItem> rowItems;
     ListView listView;
-    String textFromSpinner_location,textFromSpinner2_price,textFromSpinner3;
+    String textFromSpinner_location,textFromSpinner3;
     public static String  radio_string;
     String[] parts;
     ImageView flip_imageView;
@@ -83,7 +83,6 @@ public class Buy extends Fragment implements AdapterView.OnClickListener{
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String spinner2Selection = parent.getItemAtPosition(position).toString();
                 parts = spinner2Selection.split("-");
-                textFromSpinner2_price = "BETWEEN " + parts[0] + " AND " + parts[1];
             }
 
             @Override
@@ -92,6 +91,17 @@ public class Buy extends Fragment implements AdapterView.OnClickListener{
             }
         });
         spinner3 = (Spinner)rootView.findViewById(R.id.spinner3);
+        spinner3.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                textFromSpinner3 = parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
 
         radioGroup = (RadioGroup)rootView.findViewById(R.id.radio_group);
@@ -137,11 +147,11 @@ public class Buy extends Fragment implements AdapterView.OnClickListener{
             CustomAdapter customAdapter = new CustomAdapter(getContext(),rowItems);
             listView.setAdapter(customAdapter);
 
+            String query = "SELECT * FROM " + Sell.db.TABLE_NAME + " WHERE PRICE >= "  +
+                    parts[0] +" AND PRICE <= " + parts[1] + " AND LOCATION LIKE \""  +textFromSpinner_location  +
+                    "\" AND CATEGORY LIKE \"" + radio_string + "\" AND TITLE LIKE \"" + search.getText().toString() + "\"";
+            if(textFromSpinner3.equals("Date"))cursor = Sell.db.getAsRequested(query + "ORDER BY DATETIME(POSTED_ON) DESC");
 
-
-            cursor = Sell.db.getAsRequested("SELECT * FROM " + Sell.db.TABLE_NAME + " WHERE PRICE >= "  +
-                                        parts[0] +" AND PRICE <= " + parts[1] + " AND LOCATION LIKE \""  +textFromSpinner_location  +
-                                       "\" AND CATEGORY LIKE \"" + radio_string + "\"" + "");
             if(cursor.getCount() == 0){
                 showMessage("Error","Nothing found");
             }
@@ -149,10 +159,8 @@ public class Buy extends Fragment implements AdapterView.OnClickListener{
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     RowItem item = (RowItem) listView.getItemAtPosition(position);
-                    String bike_name = item.getBike_name();
-                    String bike_price = item.getBike_price();
-                    Cursor cursor1 = Sell.db.getAsRequested("SELECT * FROM " + Sell.db.TABLE_NAME + " WHERE TITLE LIKE \"" + bike_name + "\" " +
-                            "AND PRICE = \"" + bike_price + "\"");
+                    int bike_id = item.getId();
+                    Cursor cursor1 = Sell.db.getAsRequested("SELECT * FROM " + Sell.db.TABLE_NAME + " WHERE ID = " + String.valueOf(bike_id) );
                     while(cursor1.moveToNext()) {
                         flip3Title.setText("Title: " + cursor1.getString(0));
                         filp3Location.setText("Location: " + cursor1.getString(1));
@@ -176,7 +184,8 @@ public class Buy extends Fragment implements AdapterView.OnClickListener{
                 String title = cursor.getString(0);
                 String price = cursor.getString(2);
                 byte[] image = cursor.getBlob(9);
-                rowItems.add(new RowItem(title,price,image));
+                int id = cursor.getInt(11);
+                rowItems.add(new RowItem(title,price,image,id));
             }
             customAdapter.notifyDataSetChanged();
             vf.showNext();
