@@ -12,8 +12,8 @@ import android.database.sqlite.SQLiteStatement;
 
 public class DatabaseHelper extends SQLiteOpenHelper{
 
-    public static final String DATABASE_NAME = "bike5.db";
-    public static final String TABLE_NAME = "bikers_info_5";
+    public static final String DATABASE_NAME = "bike6.db";
+    public static final String TABLE_NAME = "bikers_info_6";
     public static  int id = 0;
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -21,7 +21,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     }
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE " + TABLE_NAME + " (TITLE TEXT ,LOCATION TEXT,PRICE TEXT,POSTED_BY TEXT,POSTED_ON TEXT,DESCRIPTION TEXT,ADDRESS TEXT,PHONE TEXT,EMAIL TEXT,IMAGE BLOB,CATEGORY TEXT,ID INTEGER PRIMARY KEY AUTOINCREMENT) ");
+        db.execSQL("CREATE TABLE " + TABLE_NAME + " (TITLE TEXT ,LOCATION TEXT,PRICE INTEGER,POSTED_BY TEXT,POSTED_ON TEXT,DESCRIPTION TEXT,ADDRESS TEXT,PHONE TEXT,EMAIL TEXT,IMAGE BLOB,CATEGORY TEXT,ID INTEGER PRIMARY KEY AUTOINCREMENT) ");
     }
 
     @Override

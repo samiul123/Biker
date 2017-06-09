@@ -14,11 +14,154 @@
             android:layout_height="match_parent"
             android:id="@+id/flipper1"
             android:background="@drawable/bike_image4">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:id="@+id/linearLayout1">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:id="@+id/searchTextFirst"
+                        android:background="@android:color/background_light"
+                        android:layout_marginTop="7dp"
+                        android:layout_marginBottom="7dp"
+                        android:layout_marginLeft="4dp"
+                        android:hint="Search"
+                        android:textSize="18sp"
+                        android:layout_weight=".7"
+                        />
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:id="@+id/searchFirst"
+                        android:text="Search" />
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:id="@+id/moreOptions"
+                        android:text="More" />
+
+                </LinearLayout>
+                <ListView
+                    android:layout_width="match_parent"
+                    android:layout_height="419dp"
+                    android:id="@+id/listViewFirst"
+                    android:layout_weight="1.17"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation = "vertical"
+                android:id="@+id/linearLayout5">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:layout_height="140dp"
+                        android:id="@+id/flip_imageViewFirst"
+                        android:layout_width="match_parent"
+                        android:layout_weight=".7" />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/filp_3_titleFirst"
+                            android:textSize="18sp"
+                            android:textColor="#000000"/>
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/filp_3_locationFirst"
+                            android:textSize="18sp"
+                            android:textColor="#000000"/>
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/filp_3_priceFirst"
+                            android:textSize="18sp"
+                            android:textColor="#000000"/>
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/filp_3_posted_byFirst"
+                            android:textSize="18sp"
+                            android:textColor="#000000"/>
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/filp_3_posted_onFirst"
+                            android:textSize="18sp"
+                            android:textColor="#000000"/>
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/filp_3_descriptionFirst"
+                            android:textSize="18sp"
+                            android:textColor="#000000"/>
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/filp_3_addressFirst"
+                            android:textSize="18sp"
+                            android:textColor="#000000"/>
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/filp_3_phoneFirst"
+                            android:textSize="18sp"
+                            android:textColor="#000000"/>
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/filp_3_emailFirst"
+                            android:textSize="18sp"
+                            android:textColor="#000000"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center">
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Back"
+                        android:id="@+id/backFirst"/>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/linearLayout2">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -31,6 +174,9 @@
                         android:background="@android:color/background_light"
                         android:hint="Search"
                         android:textSize="18sp"
+                        android:layout_marginTop="7dp"
+                        android:layout_marginBottom="7dp"
+                        android:layout_marginLeft="4dp"
                         android:layout_alignParentTop="true"
                         android:layout_weight=".7"
                         />
@@ -40,6 +186,11 @@
                         android:layout_height="match_parent"
                         android:id="@+id/search"
                         android:text="Search" />
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:id="@+id/backflip"
+                        android:text="Back" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -148,7 +299,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/linearLayout2"
+                android:id="@+id/linearLayout3"
                 android:orientation="vertical">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -180,12 +331,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation = "vertical"
-                android:id="@+id/linearLayout3">
+                android:id="@+id/linearLayout4">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="vertical">
                     <ImageView
                         android:layout_height="140dp"
                         android:id="@+id/flip_imageView"
@@ -279,6 +430,7 @@
 
 
         </ViewFlipper>
+
     </ScrollView>
 
 

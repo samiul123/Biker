@@ -32,18 +32,23 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import static android.app.Activity.RESULT_OK;
+import static com.example.lotuscomputer.biker.Buy.customAdapterFirst;
+import static com.example.lotuscomputer.biker.Buy.db;
+import static com.example.lotuscomputer.biker.Buy.listViewFirst;
+import static com.example.lotuscomputer.biker.Buy.rowItemsFirst;
 
 public class Sell extends Fragment {
-    public static DatabaseHelper db;
+
     TextView name,title,description,price,location,contact_info,address,phone,email;
     Button post_ad,cancel,choose;
     EditText editName,editTitle,editDescription,editPrice,editAddress,editPhone,editEmail;
     Spinner spinner,spinner_item;
     ImageView imageView;
     String locationFromSpinner,categoryFromSpinner;
-    DateFormat datef = new SimpleDateFormat("yyyy.MM.dd G 'at' HH:mm:ss z");
+    DateFormat datef = new SimpleDateFormat("EEE, MMM d, ''yy");
     String date = datef.format(Calendar.getInstance().getTime());
     private static final int SELECTED_PICTURE = 1;
+    public static Cursor cursorSell;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,7 +56,7 @@ public class Sell extends Fragment {
         View rootView = inflater.inflate(R.layout.sell, container, false);
 
         //initializing database
-        db = new DatabaseHelper(getContext());
+
 
         name = (TextView)rootView.findViewById(R.id.name_id);
         title = (TextView)rootView.findViewById(R.id.title_id);
@@ -132,6 +137,19 @@ public class Sell extends Fragment {
                 editPhone.setText(null);
                 editAddress.setText(null);
                 editDescription.setText(null);
+                cursorSell = db.getAsRequested("SELECT * FROM " + db.TABLE_NAME + " ORDER BY TITLE ASC");
+                rowItemsFirst.clear();
+                while(cursorSell.moveToNext()){
+                    String title = cursorSell.getString(0);
+                    String price = cursorSell.getString(2);
+                    byte[] image = cursorSell.getBlob(9);
+                    int id = cursorSell.getInt(11);
+                    rowItemsFirst.add(new RowItem(title,price,image,id));
+                }
+                customAdapterFirst = new CustomAdapter(getContext(),rowItemsFirst);
+                listViewFirst.setAdapter(customAdapterFirst);
+
+
             }
         });
         cancel = (Button) rootView.findViewById(R.id.cancel_id);
@@ -150,23 +168,23 @@ public class Sell extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         System.out.println("111111111111111111111111111111111111111111111111");
-                if(requestCode == SELECTED_PICTURE && resultCode == RESULT_OK && data != null){
-                    System.out.println("111111111111111111111111111111111111111111111111");
-                    Uri uri = data.getData();
-                    String[] projection = {MediaStore.Images.Media.DATA};
+        if(requestCode == SELECTED_PICTURE && resultCode == RESULT_OK && data != null){
+            System.out.println("111111111111111111111111111111111111111111111111");
+            Uri uri = data.getData();
+            String[] projection = {MediaStore.Images.Media.DATA};
 
-                    Cursor cursor = getActivity().getContentResolver().query(uri,projection,null,null,null);
-                    cursor.moveToFirst();
+            Cursor cursor = getActivity().getContentResolver().query(uri,projection,null,null,null);
+            cursor.moveToFirst();
 
-                    int column_index = cursor.getColumnIndex(projection[0]);
-                    String filePath = cursor.getString(column_index);
-                    cursor.close();
+            int column_index = cursor.getColumnIndex(projection[0]);
+            String filePath = cursor.getString(column_index);
+            cursor.close();
 
-                    Bitmap selectedImage  = BitmapFactory.decodeFile(filePath);
+            Bitmap selectedImage  = BitmapFactory.decodeFile(filePath);
 
-                    //Drawable d = new BitmapDrawable(selectedImage);
-                    imageView.setImageBitmap(selectedImage);
-                }
+            //Drawable d = new BitmapDrawable(selectedImage);
+            imageView.setImageBitmap(selectedImage);
+        }
 
     }
     public void showMessage(String title,String message)
