@@ -18,7 +18,7 @@
         <android.support.v7.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/darker_gray"
+            android:background="@color/colorPrimaryDark"
             android:theme="?attr/actionBarTheme"
             android:minHeight="?attr/actionBarSize"
             android:id="@+id/toolbar2"
@@ -29,7 +29,7 @@
             android:layout_height="match_parent"
             android:id="@+id/tab"
             app:tabIndicatorColor="?attr/actionMenuTextColor"
-            android:background="@android:color/darker_gray">
+            android:background="@color/colorPrimaryDark">
 
             <android.support.design.widget.TabItem
                 android:layout_width="wrap_content"

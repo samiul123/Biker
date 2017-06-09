@@ -11,6 +11,7 @@
         <item>Barisal</item>
     </string-array>
     <string-array name="category">
+        <item>none</item>
         <item>All</item>
         <item>Spare Parts</item>
         <item>Bikes</item>

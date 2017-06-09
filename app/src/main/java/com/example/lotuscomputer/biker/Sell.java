@@ -49,6 +49,7 @@ public class Sell extends Fragment {
     String date = datef.format(Calendar.getInstance().getTime());
     private static final int SELECTED_PICTURE = 1;
     public static Cursor cursorSell;
+    String categorySPinner;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -127,33 +128,44 @@ public class Sell extends Fragment {
         post_ad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean is_inserted = db.insertData(editTitle.getText().toString(),locationFromSpinner,Integer.valueOf(editPrice.getText().toString()),editName.getText().toString(),date,editDescription.getText().toString(),editAddress.getText().toString(),editPhone.getText().toString(),editEmail.getText().toString(),imageViewToByte(imageView),categoryFromSpinner);
-                if(is_inserted)showMessage("Success","Your ad has been posted");
-                else showMessage("Failure","Your ad has not been posted");
-                editName.setText(null);
-                editTitle.setText(null);
-                editPrice.setText(null);
-                editEmail.setText(null);
-                editPhone.setText(null);
-                editAddress.setText(null);
-                editDescription.setText(null);
-                cursorSell = db.getAsRequested("SELECT * FROM " + db.TABLE_NAME + " ORDER BY TITLE ASC");
-                rowItemsFirst.clear();
-                while(cursorSell.moveToNext()){
-                    String title = cursorSell.getString(0);
-                    String price = cursorSell.getString(2);
-                    byte[] image = cursorSell.getBlob(9);
-                    int id = cursorSell.getInt(11);
-                    rowItemsFirst.add(new RowItem(title,price,image,id));
+                if(editName.getText().toString().equals("") && editTitle.getText().toString().equals("") && editDescription.getText().toString().equals("") && editPhone.getText().toString().equals("") && editAddress.getText().toString().equals("") && editEmail.getText().toString().equals("") && editPrice.getText().toString().equals("") && categoryFromSpinner.equals("none") && locationFromSpinner.equals("none")){
+                    showMessage("Error","Empty fields");
                 }
-                customAdapterFirst = new CustomAdapter(getContext(),rowItemsFirst);
-                listViewFirst.setAdapter(customAdapterFirst);
+                else{
+                    boolean is_inserted = db.insertData(editTitle.getText().toString(),locationFromSpinner,Integer.valueOf(editPrice.getText().toString()),editName.getText().toString(),date,editDescription.getText().toString(),editAddress.getText().toString(),editPhone.getText().toString(),editEmail.getText().toString(),imageViewToByte(imageView),categoryFromSpinner);
+                    if(is_inserted)showMessage("Success","Your ad has been posted");
+                    else showMessage("Failure","Your ad has not been posted");
+                    editName.setText(null);
+                    editTitle.setText(null);
+                    editPrice.setText(null);
+                    editEmail.setText(null);
+                    editPhone.setText(null);
+                    editAddress.setText(null);
+                    editDescription.setText(null);
+                    cursorSell = db.getAsRequested("SELECT * FROM " + db.TABLE_NAME + " ORDER BY TITLE ASC");
+                    rowItemsFirst.clear();
+                    while(cursorSell.moveToNext()){
+                        String title = cursorSell.getString(0);
+                        String price = cursorSell.getString(2);
+                        byte[] image = cursorSell.getBlob(9);
+                        int id = cursorSell.getInt(11);
+                        rowItemsFirst.add(new RowItem(title,price,image,id));
+                    }
+                    customAdapterFirst = new CustomAdapter(getContext(),rowItemsFirst);
+                    listViewFirst.setAdapter(customAdapterFirst);
+
+                }
 
 
             }
         });
         cancel = (Button) rootView.findViewById(R.id.cancel_id);
-
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showMessage("Failure","You canceled your ads");
+            }
+        });
         return rootView;
     }
     private byte[] imageViewToByte(ImageView imageView) {
