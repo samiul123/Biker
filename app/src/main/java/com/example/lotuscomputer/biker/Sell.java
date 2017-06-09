@@ -128,7 +128,7 @@ public class Sell extends Fragment {
         post_ad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(editName.getText().toString().equals("") && editTitle.getText().toString().equals("") && editDescription.getText().toString().equals("") && editPhone.getText().toString().equals("") && editAddress.getText().toString().equals("") && editEmail.getText().toString().equals("") && editPrice.getText().toString().equals("") && categoryFromSpinner.equals("none") && locationFromSpinner.equals("none")){
+                if(editName.getText().toString().equals("") || editTitle.getText().toString().equals("") || editDescription.getText().toString().equals("") || editPhone.getText().toString().equals("") || editAddress.getText().toString().equals("") || editEmail.getText().toString().equals("") || editPrice.getText().toString().equals("") || categoryFromSpinner.equals("none") || locationFromSpinner.equals("none")){
                     showMessage("Error","Empty fields");
                 }
                 else{

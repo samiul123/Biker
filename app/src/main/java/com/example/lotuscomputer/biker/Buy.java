@@ -251,7 +251,7 @@ public class Buy extends Fragment implements AdapterView.OnClickListener{
             vf.showPrevious();
         }
         if(v == searchBtn){
-            if(search.getText().toString().equals("") && textFromSpinner_location.equals("none") && radio_string == null && spinner2Selection.equals("none")){
+            if(search.getText().toString().equals("") || textFromSpinner_location.equals("none") || radio_string.equals("none") || spinner2Selection.equals("none")){
                 showMessage("Error","Empty field");
             }
             else{
@@ -285,11 +285,12 @@ public class Buy extends Fragment implements AdapterView.OnClickListener{
                     }
                 });
 
-                String query = "SELECT * FROM " + "bikers_info_5" + " WHERE PRICE >= "  +
+                String query = "SELECT * FROM " + "bikers_info_6" + " WHERE PRICE >= "  +
                         parts[0] +" AND PRICE <= " + parts[1] + " AND LOCATION LIKE \""  +textFromSpinner_location  +
                         "\" AND CATEGORY LIKE \"" + radio_string + "\" AND TITLE LIKE \"" + search.getText().toString() + "\"";
                 if(textFromSpinner3.equals("Date"))cursor = db.getAsRequested(query + " ORDER BY DATE(POSTED_ON) DESC");
-
+                if(textFromSpinner3.equals("Name"))cursor = db.getAsRequested(query + " ORDER BY TITLE ASC");
+                if(textFromSpinner3.equals("Price"))cursor = db.getAsRequested(query + " ORDER BY PRICE ASC");
                 if(cursor.getCount() == 0){
                     showMessage("Error","Nothing found");
                 }
